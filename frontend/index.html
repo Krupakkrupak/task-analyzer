@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Task Analyzer</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Smart Task Analyzer</h1>
+            <p>Paste your tasks as JSON and let the analyzer suggest what to do first.</p>
+        </header>
+        <main class="layout">
+            <section class="input-panel">
+                <h2>Input Tasks</h2>
+                <label for="strategy">Sorting Strategy</label>
+                <select id="strategy">
+                    <option value="smart" selected>Smart Balance (Recommended)</option>
+                    <option value="fast">Fastest Wins (Low Effort First)</option>
+                    <option value="impact">High Impact (Importance First)</option>
+                    <option value="deadline">Deadline Driven (Closest Due Date)</option>
+                </select>
+
+                <textarea id="tasks-input" placeholder="[
+  {
+    &quot;title&quot;: &quot;Finish assignment&quot;,
+    &quot;due_date&quot;: &quot;2025-12-01&quot;,
+    &quot;importance&quot;: 9,
+    &quot;estimated_hours&quot;: 3,
+    &quot;dependencies&quot;: []
+  }
+]" spellcheck="false"></textarea>
+
+                <div class="controls">
+                    <button id="analyze-btn">Analyze</button>
+                    <button id="suggest-btn" class="secondary">Suggest for Today</button>
+                </div>
+                <div id="error" class="error"></div>
+            </section>
+
+            <section class="results-panel">
+                <h2>Results</h2>
+                <div id="results" class="results"></div>
+            </section>
+        </main>
+        <footer>
+            <small>Backend: Django API at <code>/api/tasks/analyze/</code> and <code>/api/tasks/suggest/</code>.</small>
+        </footer>
+    </div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
